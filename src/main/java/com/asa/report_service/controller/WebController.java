@@ -14,6 +14,12 @@ public class WebController {
         return "home";
     }
 
+    @GetMapping("/documentation")
+    public String Documentation(Model model)
+    {
+        return "documentation";
+    }
+
     @GetMapping("/dashboard")
     public String Dashboard(Model model)
     {

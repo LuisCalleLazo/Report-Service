@@ -1,12 +1,148 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="es">
 <head>
-    <title>Report Service</title>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Report Service - Plataforma de Reportes para Desarrolladores</title>
+    <link rel="stylesheet" th:href="@{/css/home.css}">
 </head>
-    <body>
-        <h1>Report Service</h1>
-        <p th:text="${message}">Mensaje por defecto</p>
-        <p>Conexión a base de datos: <strong>Exitosa</strong></p>
-    </body>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="nav">
+                <div class="logo">
+                    <h2>Servicio de Reportes</h2>
+                </div>
+                <div class="auth-buttons">
+                    <button class="btn btn-outline" onclick="openModal('loginModal')">Login</button>
+                    <button class="btn btn-primary" onclick="openModal('registerModal')">Register</button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="hero-title">Reportes con Jasper Reports</h1>
+                <p class="hero-subtitle">
+                    Genera, analiza y gestiona reportes de tu aplicación con nuestra API robusta y fácil de integrar.
+                    Diseñado por desarrolladores, para desarrolladores.
+                </p>
+                <div class="hero-buttons">
+                    <button class="btn btn-primary btn-large" onclick="openModal('registerModal')">
+                        Comenzar Gratis
+                    </button>
+                    <button class="btn btn-outline btn-large" onclick="location.href='documentation'">
+                        Ver Documentación
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="features">
+        <div class="container">
+            <h2 class="section-title">¿Por qué elegir Report Service?</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">⚡</div>
+                    <h3>API Rápida</h3>
+                    <p>Respuestas en milisegundos con nuestra infraestructura optimizada</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📊</div>
+                    <h3>Reportes Avanzados</h3>
+                    <p>Visualizaciones interactivas y exportación en múltiples formatos</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔒</div>
+                    <h3>Seguro</h3>
+                    <p>Encriptación end-to-end y cumplimiento con estándares de seguridad</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!--  LOGIN MODAL  -->
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Iniciar Sesión</h3>
+                <span class="close" onclick="closeModal('loginModal')">&times;</span>
+            </div>
+            <form class="modal-form">
+                <div class="form-group">
+                    <label for="loginEmail">Email</label>
+                    <input type="email" id="loginEmail" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="loginPassword">Contraseña</label>
+                    <input type="password" id="loginPassword" name="password" required>
+                </div>
+                <button type="submit" class="btn btn-primary btn-full">Iniciar Sesión</button>
+                <p class="modal-footer">
+                    ¿No tienes cuenta?
+                    <a href="#" onclick="switchModal('loginModal', 'registerModal')">Regístrate aquí</a>
+                </p>
+            </form>
+        </div>
+    </div>
+
+    <!--  REGISTER MODAL  -->
+    <div id="registerModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Crear Cuenta</h3>
+                <span class="close" onclick="closeModal('registerModal')">&times;</span>
+            </div>
+            <form class="modal-form">
+                <div class="form-group">
+                    <label for="registerName">Nombre</label>
+                    <input type="text" id="registerName" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="registerEmail">Email</label>
+                    <input type="email" id="registerEmail" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="registerPassword">Contraseña</label>
+                    <input type="password" id="registerPassword" name="password" required>
+                </div>
+                <div class="form-group">
+                    <label for="registerConfirmPassword">Confirmar Contraseña</label>
+                    <input type="password" id="registerConfirmPassword" name="confirmPassword" required>
+                </div>
+                <button type="submit" class="btn btn-primary btn-full">Crear Cuenta</button>
+                <p class="modal-footer">
+                    ¿Ya tienes cuenta?
+                    <a href="#" onclick="switchModal('registerModal', 'loginModal')">Inicia sesión aquí</a>
+                </p>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Modal functionality
+        function openModal(modalId) {
+            document.getElementById(modalId).style.display = 'block';
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = 'none';
+        }
+
+        function switchModal(currentModal, targetModal) {
+            closeModal(currentModal);
+            openModal(targetModal);
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            if (event.target.classList.contains('modal')) {
+                event.target.style.display = 'none';
+            }
+        }
+    </script>
+</body>
 </html>

@@ -26,7 +26,8 @@ public interface ConfigServerConnectRepository extends JpaRepository<ConfigServe
     @Query("SELECT c FROM ConfigServerConnect c WHERE c.serverName LIKE %:keyword% OR c.serverDescription LIKE %:keyword%")
     List<ConfigServerConnect> searchByKeyword(@Param("keyword") String keyword);
 
-    Optional<ConfigServerConnect> findByServerNameOrIp(String serverNameOrIp);
+    @Query("SELECT c FROM ConfigServerConnect c WHERE c.serverName = :value OR c.serverNameOrIp = :value")
+    Optional<ConfigServerConnect> findByServerNameOrServerNameOrIp(String value);
 
     List<ConfigServerConnect> findByServerPort(Integer port);
 

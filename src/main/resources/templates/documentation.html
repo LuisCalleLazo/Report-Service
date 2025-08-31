@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Report Service API - Documentación</title>
+    <link rel="stylesheet" th:href="@{/css/documentation.css}">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="header-left">
+                    <button class="mobile-menu-btn" id="mobileMenuBtn">
+                        <span class="hamburger"></span>
+                    </button>
+                    <div class="logo" onclick="location.href='/">
+                        <div class="logo-icon">⚡</div>
+                        <h1>Report Service API</h1>
+                    </div>
+                </div>
+                <div class="version-badge">v1.0</div>
+            </div>
+        </div>
+    </header>
+
+    <div class="main-container">
+        <aside class="sidebar" id="sidebar">
+            <nav class="sidebar-nav">
+                <button class="nav-item active" data-section="introduction">
+                    <span class="nav-icon">📖</span>
+                    Introducción
+                </button>
+                <button class="nav-item" data-section="authentication">
+                    <span class="nav-icon">🔑</span>
+                    Autenticación
+                </button>
+                <button class="nav-item" data-section="endpoints">
+                    <span class="nav-icon">🗄️</span>
+                    Endpoints
+                </button>
+                <button class="nav-item" data-section="examples">
+                    <span class="nav-icon">💻</span>
+                    Ejemplos
+                </button>
+                <button class="nav-item" data-section="errors">
+                    <span class="nav-icon">🛡️</span>
+                    Códigos de Error
+                </button>
+            </nav>
+        </aside>
+
+        <main class="main-content">
+            Introduction Section
+            <section class="content-section active" id="introduction">
+                <div class="section-header">
+                    <h2>Introducción</h2>
+                    <p class="section-description">
+                        Bienvenido a la documentación de Report Service API. Una API REST robusta y escalable diseñada para
+                        desarrolladores que necesitan generar, gestionar y analizar reportes de manera eficiente.
+                    </p>
+                </div>
+
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-header">
+                            <span class="feature-icon">⚡</span>
+                            <h3>Rápido y Confiable</h3>
+                        </div>
+                        <p>Respuestas en menos de 100ms con 99.9% de uptime garantizado.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-header">
+                            <span class="feature-icon">🛡️</span>
+                            <h3>Seguro por Defecto</h3>
+                        </div>
+                        <p>Autenticación JWT, rate limiting y encriptación end-to-end.</p>
+                    </div>
+                </div>
+
+                <div class="code-card">
+                    <div class="code-header">
+                        <h3>URL Base</h3>
+                    </div>
+                    <div class="code-block">
+                        <div class="code-toolbar">
+                            <span class="code-language">URL</span>
+                            <button class="copy-btn" data-code="https://api.reportservice.dev/v2">
+                                <span class="copy-icon">📋</span>
+                            </button>
+                        </div>
+                        <pre><code>https://api.reportservice.dev/v2</code></pre>
+                    </div>
+                </div>
+            </section>
+
+            <section class="content-section" id="authentication">
+                <div class="section-header">
+                    <h2>Autenticación</h2>
+                    <p class="section-description">
+                        Report Service API utiliza tokens JWT para la autenticación. Todos los endpoints requieren un token
+                        válido en el header Authorization.
+                    </p>
+                </div>
+
+                <div class="code-card">
+                    <div class="code-header">
+                        <h3>Obtener Token de Acceso</h3>
+                        <span class="endpoint-method">POST /auth/login</span>
+                    </div>
+                    <div class="code-block">
+                        <div class="code-toolbar">
+                            <span class="code-language">bash</span>
+                            <button class="copy-btn" data-code="curl -X POST https://api.reportservice.dev/v2/auth/login \
+      -H &quot;Content-Type: application/json&quot; \
+      -d '{
+        &quot;email&quot;: &quot;developer@example.com&quot;,
+        &quot;password&quot;: &quot;your_secure_password&quot;
+      }'">
+                                <span class="copy-icon">📋</span>
+                            </button>
+                        </div>
+                        <pre><code>curl -X POST https://api.reportservice.dev/v2/auth/login \
+      -H "Content-Type: application/json" \
+      -d '{
+        "email": "developer@example.com",
+        "password": "your_secure_password"
+      }'</code></pre>
+                    </div>
+                </div>
+
+                <div class="code-card">
+                    <div class="code-header">
+                        <h4>Respuesta:</h4>
+                    </div>
+                    <div class="code-block">
+                        <div class="code-toolbar">
+                            <span class="code-language">json</span>
+                            <button class="copy-btn" data-code='{
+      "success": true,
+      "data": {
+        "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
+        "token_type": "Bearer",
+        "expires_in": 3600
+      }
+    }'>
+                                <span class="copy-icon">📋</span>
+                            </button>
+                        </div>
+                        <pre><code>{
+      "success": true,
+      "data": {
+        "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
+        "token_type": "Bearer",
+        "expires_in": 3600
+      }
+    }</code></pre>
+                    </div>
+                </div>
+
+                <div class="code-card">
+                    <div class="code-header">
+                        <h3>Usar el Token</h3>
+                    </div>
+                    <div class="code-block">
+                        <div class="code-toolbar">
+                            <span class="code-language">bash</span>
+                            <button class="copy-btn" data-code="curl -X GET https://api.reportservice.dev/v2/reports \
+      -H &quot;Authorization: Bearer YOUR_ACCESS_TOKEN&quot;">
+                                <span class="copy-icon">📋</span>
+                            </button>
+                        </div>
+                        <pre><code>curl -X GET https://api.reportservice.dev/v2/reports \
+      -H "Authorization: Bearer YOUR_ACCESS_TOKEN"</code></pre>
+                    </div>
+                </div>
+            </section>
+
+            <section class="content-section" id="endpoints">
+                <div class="section-header">
+                    <h2>Endpoints</h2>
+                    <p class="section-description">
+                        Referencia completa de todos los endpoints disponibles en la API.
+                    </p>
+                </div>
+
+                <div class="tabs">
+                    <div class="tab-list">
+                        <button class="tab-btn active" data-tab="reports">Reportes</button>
+                        <button class="tab-btn" data-tab="users">Usuarios</button>
+                        <button class="tab-btn" data-tab="analytics">Analytics</button>
+                    </div>
+
+                    <div class="tab-content active" id="reports">
+                        <div class="endpoint-card">
+                            <div class="endpoint-header">
+                                <h3>Listar Reportes</h3>
+                                <span class="method-badge get">GET</span>
+                            </div>
+                            <p class="endpoint-path">/reports</p>
+                            <div class="code-block">
+                                <div class="code-toolbar">
+                                    <span class="code-language">http</span>
+                                    <button class="copy-btn" data-code="GET /reports?page=1&limit=10&status=active">
+                                        <span class="copy-icon">📋</span>
+                                    </button>
+                                </div>
+                                <pre><code>GET /reports?page=1&limit=10&status=active</code></pre>
+                            </div>
+                        </div>
+
+                        <div class="endpoint-card">
+                            <div class="endpoint-header">
+                                <h3>Crear Reporte</h3>
+                                <span class="method-badge post">POST</span>
+                            </div>
+                            <p class="endpoint-path">/reports</p>
+                            <div class="code-block">
+                                <div class="code-toolbar">
+                                    <span class="code-language">json</span>
+                                    <button class="copy-btn" data-code='{
+      "title": "Reporte Mensual",
+      "type": "monthly",
+      "data_source": "database",
+      "filters": {
+        "date_range": "2024-01-01,2024-01-31",
+        "department": "sales"
+      }
+    }'>
+                                        <span class="copy-icon">📋</span>
+                                    </button>
+                                </div>
+                                <pre><code>{
+      "title": "Reporte Mensual",
+      "type": "monthly",
+      "data_source": "database",
+      "filters": {
+        "date_range": "2024-01-01,2024-01-31",
+        "department": "sales"
+      }
+    }</code></pre>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tab-content" id="users">
+                        <div class="endpoint-card">
+                            <div class="endpoint-header">
+                                <h3>Perfil de Usuario</h3>
+                                <span class="method-badge get">GET</span>
+                            </div>
+                            <p class="endpoint-path">/users/me</p>
+                            <div class="code-block">
+                                <div class="code-toolbar">
+                                    <span class="code-language">json</span>
+                                    <button class="copy-btn" data-code='{
+      "id": "user_123",
+      "email": "developer@example.com",
+      "role": "admin",
+      "created_at": "2024-01-15T10:30:00Z"
+    }'>
+                                        <span class="copy-icon">📋</span>
+                                    </button>
+                                </div>
+                                <pre><code>{
+      "id": "user_123",
+      "email": "developer@example.com",
+      "role": "admin",
+      "created_at": "2024-01-15T10:30:00Z"
+    }</code></pre>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tab-content" id="analytics">
+                        <div class="endpoint-card">
+                            <div class="endpoint-header">
+                                <h3>Métricas de API</h3>
+                                <span class="method-badge get">GET</span>
+                            </div>
+                            <p class="endpoint-path">/analytics/metrics</p>
+                            <div class="code-block">
+                                <div class="code-toolbar">
+                                    <span class="code-language">json</span>
+                                    <button class="copy-btn" data-code='{
+      "requests_today": 1247,
+      "avg_response_time": "89ms",
+      "success_rate": "99.2%",
+      "quota_remaining": 8753
+    }'>
+                                        <span class="copy-icon">📋</span>
+                                    </button>
+                                </div>
+                                <pre><code>{
+      "requests_today": 1247,
+      "avg_response_time": "89ms",
+      "success_rate": "99.2%",
+      "quota_remaining": 8753
+    }</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="content-section" id="examples">
+                <div class="section-header">
+                    <h2>Ejemplos de Código</h2>
+                    <p class="section-description">
+                        Ejemplos prácticos en diferentes lenguajes de programación.
+                    </p>
+                </div>
+
+                <div class="tabs">
+                    <div class="tab-list">
+                        <button class="tab-btn active" data-tab="javascript-ex">JavaScript</button>
+                        <button class="tab-btn" data-tab="python-ex">Python</button>
+                        <button class="tab-btn" data-tab="php-ex">PHP</button>
+                        <button class="tab-btn" data-tab="java-ex">Java</button>
+                    </div>
+
+                    <div class="tab-content active" id="javascript-ex">
+                        <div class="code-card">
+                            <div class="code-header">
+                                <h3>Cliente JavaScript</h3>
+                            </div>
+                            <div class="code-block">
+                                <div class="code-toolbar">
+                                    <span class="code-language">javascript</span>
+                                    <button class="copy-btn">
+                                        <span class="copy-icon">📋</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tab-content" id="python-ex">
+                        <div class="code-card">
+                            <div class="code-header">
+                                <h3>Cliente Python</h3>
+                            </div>
+                            <div class="code-block">
+                                <div class="code-toolbar">
+                                    <span class="code-language">python</span>
+                                    <button class="copy-btn">
+                                        <span class="copy-icon">📋</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tab-content" id="php-ex">
+                        <div class="code-card">
+                            <div class="code-header">
+                                <h3>Cliente PHP</h3>
+                            </div>
+                            <div class="code-block">
+                                <div class="code-toolbar">
+                                    <span class="code-language">php</span>
+                                    <button class="copy-btn">
+                                        <span class="copy-icon">📋</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tab-content" id="java-ex">
+                        <div class="code-card">
+                            <div class="code-header">
+                                <h3>Cliente Java</h3>
+                            </div>
+                            <div class="code-block">
+                                <div class="code-toolbar">
+                                    <span class="code-language">java</span>
+                                    <button class="copy-btn" data-code="import java.net.http.HttpClient;
+    import java.net.http.HttpRequest;
+    import java.net.http.HttpResponse;
+    import java.net.URI;
+
+    public class ReportServiceClient {
+        private static final String BASE_URL = &quot;https://api.reportservice.dev/v2&quot;;
+        private final String token;
+        private final HttpClient client;
+
+        public ReportServiceClient(String token) {
+            this.token = token;
+            this.client = HttpClient.newHttpClient();
+        }
+
+        public String createReport(String jsonData) throws Exception {
+            HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create(BASE_URL + &quot;/reports&quot;))
+                .header(&quot;Authorization&quot;, &quot;Bearer &quot; + token)
+                .header(&quot;Content-Type&quot;, &quot;application/json&quot;)
+                .POST(HttpRequest.BodyPublishers.ofString(jsonData))
+                .build();
+
+            HttpResponse&lt;String&gt; response = client.send(request,
+                HttpResponse.BodyHandlers.ofString());
+
+            return response.body();
+        }
+    }
+
+    // Uso
+    ReportServiceClient client = new ReportServiceClient(&quot;YOUR_ACCESS_TOKEN&quot;);
+
+    String reportData = &quot;&quot;&quot;
+    {
+        &quot;title&quot;: &quot;Ventas Q1 2024&quot;,
+        &quot;type&quot;: &quot;quarterly&quot;,
+        &quot;data_source&quot;: &quot;database&quot;
+    }
+    &quot;&quot;&quot;;
+
+    String result = client.createReport(reportData);">
+                                        <span class="copy-icon">📋</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            Errors Section
+            <section class="content-section" id="errors">
+                <div class="section-header">
+                    <h2>Códigos de Error</h2>
+                    <p class="section-description">
+                        Report Service API utiliza códigos de estado HTTP estándar para indicar el éxito o fallo de las
+                        peticiones.
+                    </p>
+                </div>
+
+                <div class="error-cards">
+                    <div class="error-card">
+                        <div class="error-header">
+                            <h3>200 - OK</h3>
+                            <span class="status-badge success">Success</span>
+                        </div>
+                        <p>La petición se procesó correctamente.</p>
+                    </div>
+
+                    <div class="error-card">
+                        <div class="error-header">
+                            <h3>400 - Bad Request</h3>
+                            <span class="status-badge error">Client Error</span>
+                        </div>
+                        <p>La petición contiene sintaxis incorrecta o parámetros inválidos.</p>
+                        <div class="code-block">
+                            <div class="code-toolbar">
+                                <span class="code-language">json</span>
+                                <button class="copy-btn">
+                                    <span class="copy-icon">📋</span>
+                                </button>
+                            </div>
+                            <pre><code>{
+      "error": {
+        "code": "INVALID_PARAMETERS",
+        "message": "El campo 'title' es requerido",
+        "details": {
+          "field": "title",
+          "reason": "missing_required_field"
+        }
+      }
+    }</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="error-card">
+                        <div class="error-header">
+                            <h3>401 - Unauthorized</h3>
+                            <span class="status-badge error">Auth Error</span>
+                        </div>
+                        <p>Token de autenticación inválido o expirado.</p>
+                        <div class="code-block">
+                            <div class="code-toolbar">
+                                <span class="code-language">json</span>
+                                <button class="copy-btn" data-code='{
+      "error": {
+        "code": "UNAUTHORIZED",
+        "message": "Token de acceso inválido o expirado"
+      }
+    }'>
+                                    <span class="copy-icon">📋</span>
+                                </button>
+                            </div>
+                            <pre><code>{
+      "error": {
+        "code": "UNAUTHORIZED",
+        "message": "Token de acceso inválido o expirado"
+      }
+    }</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="error-card">
+                        <div class="error-header">
+                            <h3>429 - Too Many Requests</h3>
+                            <span class="status-badge error">Rate Limit</span>
+                        </div>
+                        <p>Se ha excedido el límite de peticiones por minuto.</p>
+                        <div class="code-block">
+                            <div class="code-toolbar">
+                                <span class="code-language">json</span>
+                                <button class="copy-btn" data-code='{
+      "error": {
+        "code": "RATE_LIMIT_EXCEEDED",
+        "message": "Límite de peticiones excedido",
+        "retry_after": 60
+      }
+    }'>
+                                    <span class="copy-icon">📋</span>
+                                </button>
+                            </div>
+                            <pre><code>{
+      "error": {
+        "code": "RATE_LIMIT_EXCEEDED",
+        "message": "Límite de peticiones excedido",
+        "retry_after": 60
+      }
+    }</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="error-card">
+                        <div class="error-header">
+                            <h3>500 - Internal Server Error</h3>
+                            <span class="status-badge error">Server Error</span>
+                        </div>
+                        <p>Error interno del servidor. Contacta soporte si persiste.</p>
+                        <div class="code-block">
+                            <div class="code-toolbar">
+                                <span class="code-language">json</span>
+                                <button class="copy-btn" data-code='{
+      "error": {
+        "code": "INTERNAL_ERROR",
+        "message": "Error interno del servidor",
+        "request_id": "req_abc123"
+      }
+    }'>
+                                    <span class="copy-icon">📋</span>
+                                </button>
+                            </div>
+                            <pre><code>{
+      "error": {
+        "code": "INTERNAL_ERROR",
+        "message": "Error interno del servidor",
+        "request_id": "req_abc123"
+      }
+    }</code></pre>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <div class="mobile-overlay" id="mobileOverlay"></div>
+
+    <script th:src="@{/js/documentation.js}"></script>
+</body>
+</html>
