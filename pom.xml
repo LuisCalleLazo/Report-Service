@@ -33,6 +33,15 @@
 		<spring-grpc.version>0.10.0</spring-grpc.version>
 	</properties>
 	<dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-thymeleaf</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <scope>runtime</scope>
+        </dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
@@ -80,6 +89,7 @@
 				<artifactId>protobuf-maven-plugin</artifactId>
 				<version>3.4.2</version>
 				<configuration>
+                    <skip>true</skip>
 					<protocVersion>${protobuf-java.version}</protocVersion>
 					<binaryMavenPlugins>
 						<binaryMavenPlugin>
